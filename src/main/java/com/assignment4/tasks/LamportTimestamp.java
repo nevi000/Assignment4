@@ -9,14 +9,14 @@ public class LamportTimestamp {
         timestamp = time;
     }
     public synchronized void tick(){
-        // TODO: update the timestamp by 1
+        timestamp = timestamp + 1;
     }
     public synchronized int getCurrentTimestamp(){
         return timestamp;
     }
     public synchronized void updateClock(int receivedTimestamp){
         // TODO: update the function to choose the higher value out of the two received timestamps
-        timestamp = receivedTimestamp;
+        timestamp = Math.max(timestamp, receivedTimestamp) + 1;
     }
 
 }
