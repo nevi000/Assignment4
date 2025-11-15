@@ -59,10 +59,16 @@ public class UdpVectorClient {
         
         // TODO: Increment the vector clock for the client's process
         // The clock should NOT tick if the message to send is "history" (for Task 2.2)
+        if (!messageBody.equalsIgnoreCase("history")) {
+          vcl.tick(id - 1);
+        }
         
         // TODO: Prepare the message with the updated vector clock and client ID and send it to the server
         //String responseMessage = "message:timestamp:id";
         String responseMessage = messageBody + ":" + vcl.showClock() + ":" + id;
+        byte[] responseData = responseMessage.getBytes();
+        DatagramPacket sendPacket = new DatagramPacket(responseData, responseData.length, ipAddress, port);
+        clientSocket.send(sendPacket);
         System.out.println("Sent message: " + responseMessage);
         System.out.println("Current clock: " + vcl.showClock());
       }

@@ -65,9 +65,11 @@ public class VectorClientThread implements Runnable {
   private void displayMessage(Message message) {
 
     System.out.println("Client " + message.getSenderID() + ":" + message.getMessage() + ":" + message.getClock().showClock());
+
+
     vcl.updateClock(message.getClock());
 
-    System.out.println("Client " + message.getSenderID() + ": " + message.getMessage() + ": " + vcl.showClock());
+    System.out.println("Current clock: " + vcl.showClock());
 
   }
 }
