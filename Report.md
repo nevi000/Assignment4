@@ -19,7 +19,9 @@ Assignment 4
 
 1. What is potential causality in Distributed Systems, and how can you model it? Why
    “potential causality” and not just “causality”?
->
+>Potential causaulity refers to the possible relationship between two events in a distributed system. 
+>Since processes do not share a global clock, we can only determine whether one event may have influenced another.
+> Lamport Clocks or Vector Clocks track which event happened before
 
 2. If you look at your implementation of Task 2.1, can you think of one limitation of Vector Clocks? How would you overcome the limitation?
 >
