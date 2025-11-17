@@ -47,7 +47,6 @@ public class VectorClientThread implements Runnable {
         for (int i = 0; i < receivedTimestamps.length; i++) {
             senderClock.setVectorClock(i, receivedTimestamps[i]);
         }
-
         displayMessage(new Message(messageBody, senderClock, senderId));
 
     } catch (Exception e) {
@@ -73,6 +72,7 @@ public class VectorClientThread implements Runnable {
         } else {
           System.out.println("Buffered message " + message.getMessage() + " with Clock " + message.getClock().showClock());
             buffer.add(message);
+            return;
       }
 
       boolean delivered = true;
