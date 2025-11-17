@@ -11,10 +11,18 @@ Assignment 4
 
 1. Why did message D have to be buffered and can we now always guarantee that all clients
    display the same message order?
-
+    In a Vector Clock based broadcast a message can only be delivered when all causal predecessors have been delivered first.
+    Message D was buffered because its vector timestamp indicated that some earlier message had not yet been delivered. 
+    Delivering D immediately would violate causal order.
+    We guarantee that all clients display the messages in the same order as long as messages are enventually delivered and no packets get lost.
+    Causally related messages always appear in the same order everywhere but concurrent messages may appear in different orders. 
 2. Note that the chat application uses UDP. What could be an issue with this design choice—and
    how would you fix it?
-   
+    UDP is unreliable. This means packets can be lost, packets can arrive out of order and can be duplicated. 
+    For causal broadcast based on Vector Clocks this is a big problem because if a message is lost the client will wait forever for a missing causal predecessor.
+    This could result in a potentially freezing client.
+    We could switch to TCP. TCP gives guaranteed delivery, ordered delivery and no duplication.
+    TCP removes all reliability issues. 
 # Task 3
 
 1. What is potential causality in Distributed Systems, and how can you model it? Why
