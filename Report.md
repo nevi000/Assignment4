@@ -33,4 +33,11 @@ Assignment 4
 3. Figure 4 shows an example of enforcing causal communication using Vector Clocks. You can find a detailed explanation of this example and the broadcast algorithm being used in
    the Distributed Systems book by van Steen and Tannenbaum (see Chapter 5.2.2, page 270). Would you achieve the same result if you used the same broadcast algorithm but replaced
    Vector Clocks with Lamport Clocks? If not, why not? Explain briefly.
->
+> No, Lamport Clocks can't enforce causal ordering.
+> With Lamport this holds:
+> A -> B -> LC(A) < LC(B)
+> But not this:
+> LC(A) < LC(B)  -/> A → B
+> This means Lamport Clocks can't distinguish between causally related events and concurrent/independent events
+> Vector Clocks can do this, because they encode causal dependencies. 
+
