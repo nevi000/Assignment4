@@ -64,12 +64,38 @@ public class VectorClientThread implements Runnable {
 */
   private void displayMessage(Message message) {
 
-    System.out.println("Client " + message.getSenderID() + ": " + message.getMessage() + ": " + message.getClock().showClock());
+      if (vcl.checkAcceptMessage(message.getSenderID() -1, message.getClock())){
+          System.out.println("Client " + message.getSenderID() + ": " + message.getMessage() + ": " + message.getClock().showClock());
+
+          vcl.updateClock(message.getClock());
+          System.out.println("Current clock: " + vcl.showClock());
+
+        } else {
+          System.out.println("Buffered message " + message.getMessage() + " with Clock " + message.getClock().showClock());
+            buffer.add(message);
+      }
+
+      boolean delivered = true;
+
+      while (delivered) {
+          delivered = false;
+
+          for (int i = 0; i < buffer.size(); i++) {
+                Message bufferedMessage = buffer.get(i);
+                if (vcl.checkAcceptMessage(bufferedMessage.getSenderID() - 1, bufferedMessage.getClock())) {
+                    System.out.println("Client " + bufferedMessage.getSenderID() + ": " + bufferedMessage.getMessage() + ": " + bufferedMessage.getClock().showClock());
+
+                    vcl.updateClock(bufferedMessage.getClock());
+                    System.out.println("Current clock: " + vcl.showClock());
+
+                    buffer.remove(i);
+                    delivered = true;
+                    break; // Restart the loop after modifying the buffer
+                }
+          }
+      }
 
 
-    vcl.updateClock(message.getClock());
-
-    System.out.println("Current clock: " + vcl.showClock());
 
   }
 }
