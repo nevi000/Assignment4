@@ -74,7 +74,7 @@ public class VectorClientThread implements Runnable {
               System.out.println("Current clock: " + vcl.showClock());
 
           } else {
-              System.out.println("Buffereasfdsasafd Message " + message.getMessage() + " with Clock: " + message.getClock().showClock());
+              System.out.println("Buffered Message " + message.getMessage() + " with Clock: " + message.getClock().showClock());
               buffer.add(message);
           }
 
