@@ -58,7 +58,7 @@ public class UdpVectorClient {
         }
         
         // TODO: Increment the vector clock for the client's process
-        // The clock should NOT tick if the message to send is "history" (for Task 2.2)
+        //The clock should NOT tick if the message to send is "history" (for Task 2.2)
         if (!messageBody.equalsIgnoreCase("history")) {
           vcl.tick(id - 1);
         }
