@@ -67,40 +67,27 @@ public class VectorClientThread implements Runnable {
 */
   private void displayMessage(Message message) {
 
-          // 1. Check if message can be accepted
           if (vcl.checkAcceptMessage(message.getSenderID(), message.getClock())) {
-
-              // deliver message
-              System.out.println("Client " + message.getSenderID() + ": " +
-                      message.getMessage() + ": " + message.getClock().showClock());
+              System.out.println("Client " + message.getSenderID() + ": " + message.getMessage() + ": " + message.getClock().showClock());
 
               vcl.updateClock(message.getClock());
               System.out.println("Current clock: " + vcl.showClock());
 
           } else {
-              // buffer message
-              System.out.println("Buffereasfdsasafd Message " + message.getMessage() +
-                      " with Clock: " + message.getClock().showClock());
+              System.out.println("Buffereasfdsasafd Message " + message.getMessage() + " with Clock: " + message.getClock().showClock());
               buffer.add(message);
           }
 
-          // 2. Try to deliver messages from buffer
           boolean delivered = true;
           while (delivered) {
               delivered = false;
-
               for (int i = 0; i < buffer.size(); i++) {
                   Message m = buffer.get(i);
-
                   if (vcl.checkAcceptMessage(m.getSenderID(), m.getClock())) {
 
-                      //deliver buffered message
-                      System.out.println("Client " + m.getSenderID() + ": " +
-                              m.getMessage() + ": " + m.getClock().showClock());
-
+                      System.out.println("Client " + m.getSenderID() + ": " + m.getMessage() + ": " + m.getClock().showClock());
                       vcl.updateClock(m.getClock());
                       System.out.println("Current clock: " + vcl.showClock());
-
                       buffer.remove(i);
                       delivered = true;
                       break;
@@ -108,10 +95,4 @@ public class VectorClientThread implements Runnable {
               }
           }
       }
-
-
-
-
-
-
   }
