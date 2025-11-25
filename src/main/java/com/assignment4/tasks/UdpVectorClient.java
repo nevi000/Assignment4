@@ -29,8 +29,6 @@ public class UdpVectorClient {
 
     // TODO: This should not be counted as a message event, so the clock should not tick
 
-    //String joinMessage = "message:timestamp:id";
-
     String joinMessage = "Client " + id + " joined:" + vcl.showClock() + ":" + id;
 
     //TODO: Send an initial "join" message to notify the other clients that a new one has connected
