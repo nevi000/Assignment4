@@ -92,7 +92,7 @@ public class VectorClientThread implements Runnable {
               for (int i = 0; i < buffer.size(); i++) {
                   Message m = buffer.get(i);
 
-                  if (vcl.checkAcceptMessage(m.getSenderID() - 1, m.getClock())) {
+                  if (vcl.checkAcceptMessage(m.getSenderID(), m.getClock())) {
 
                       //deliver buffered message
                       System.out.println("Client " + m.getSenderID() + ": " +
