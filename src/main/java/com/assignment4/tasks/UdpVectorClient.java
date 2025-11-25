@@ -62,7 +62,6 @@ public class UdpVectorClient {
         }
         
         // TODO: Prepare the message with the updated vector clock and client ID and send it to the server
-        //String responseMessage = "message:timestamp:id";
         String responseMessage = messageBody + ":" + vcl.showClock() + ":" + id;
         byte[] responseData = responseMessage.getBytes();
         DatagramPacket sendPacket = new DatagramPacket(responseData, responseData.length, ipAddress, port);
