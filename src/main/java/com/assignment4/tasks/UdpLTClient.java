@@ -55,17 +55,12 @@ public class UdpLTClient {
         }
 
         if (!messageBody.isEmpty()) {
-
             lc.tick();
-
             int currentTs = lc.getCurrentTimestamp();
             String responseMessage = messageBody + ":" + currentTs + ":" + id;
-
             byte[] sendDataMsg = responseMessage.getBytes();
-            DatagramPacket sendPacket =
-                    new DatagramPacket(sendDataMsg, sendDataMsg.length, ipAddress, port);
+            DatagramPacket sendPacket = new DatagramPacket(sendDataMsg, sendDataMsg.length, ipAddress, port);
             clientSocket.send(sendPacket);
-
           // Print the sent message along with its timestamp
           System.out.println("Sent message: " + messageBody + ":" + "with timestamp: " + currentTs);
         }
